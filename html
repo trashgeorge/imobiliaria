@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imobiliária R.M - Orçamento de Aluguel</title>
+    <style>
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f1f1f1;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6d19;
+            font-size: 22px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background: #ff6d19;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff6d199d;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            background: #e9f5ff;
+            border-left: 5px solid #ff6d19;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Imobiliária R.M</h1>
+        <p>Gerador de Orçamento de Aluguel</p>
+
+        <label for="tipo">Tipo de Imóvel:</label>
+        <select id="tipo">
+            <option value="">Selecione</option>
+            <option value="apartamento">Apartamento</option>
+            <option value="casa">Casa</option>
+            <option value="estudio">Estúdio</option>
+        </select>
+
+        <label for="quartos">Número de Quartos:</label>
+        <input type="number" id="quartos" min="1" value="1">
+
+        <button onclick="gerarOrcamento()">Gerar Orçamento</button>
+
+        <div id="resultado" class="resultado" style="display: none;"></div>
+
+        <footer>Imobiliária R.M - Seu novo lar começa aqui!</footer>
+    </div>
+
+    <script>
+        // Função principal - gera o orçamento
+        function gerarOrcamento() {
+            const tipo = document.getElementById('tipo').value;
+            const quartos = parseInt(document.getElementById('quartos').value);
+            let valorTotal = 0;
+            let textoTipo = '';
+
+            if (!tipo) {
+                alert("Por favor, selecione um tipo de imóvel!");
+                return;
+            }
+
+            // Valores base e adicionais
+            if (tipo === 'apartamento') {
+                textoTipo = 'Apartamento';
+                valorTotal = 700 + (quartos - 1) * 200;
+            } else if (tipo === 'casa') {
+                textoTipo = 'Casa';
+                valorTotal = 900 + (quartos - 1) * 250;
+            } else if (tipo === 'estudio') {
+                textoTipo = 'Estúdio';
+                valorTotal = 1200;
+            }
+
+            // Exibir resultado formatado
+            const resultado = document.getElementById('resultado');
+            resultado.style.display = 'block';
+            resultado.innerHTML = `
+        <h3>Orçamento Gerado</h3>
+        <p><strong>Tipo de Imóvel:</strong> ${textoTipo}</p>
+        <p><strong>Número de Quartos:</strong> ${quartos}</p>
+        <p><strong>Valor Mensal:</strong> R$ ${valorTotal.toFixed(2)}</p>
+      `;
+        }
+    </script>
+</body>
+
+</html>
