@@ -1,0 +1,130 @@
+def cabecalho():
+    print("=" * 60)
+    print("        SISTEMA DE ORÇAMENTO DE ALUGUEL - IMOBILIÁRIA R.M")
+    print("=" * 60)
+    print()
+
+
+def menu():
+    print("TIPOS DE IMÓVEL DISPONÍVEIS:")
+    print("1 - Apartamento (R$ 700,00 / 1 quarto)")
+    print("2 - Casa         (R$ 900,00 / 1 quarto)")
+    print("3 - Estúdio      (R$ 1200,00 / 1 quarto)")
+    print()
+
+
+def gerar_orcamento(tipo_imovel, quartos):
+    # Valores base padrão
+    valores = {
+        1: {"nome": "Apartamento", "base": 700},
+        2: {"nome": "Casa", "base": 900},
+        3: {"nome": "Estúdio", "base": 1200}
+    }
+
+    if tipo_imovel not in valores:
+        return None
+
+    imovel = valores[tipo_imovel]
+    valor_base = imovel["base"]
+
+    # Regra hipotética: cada quarto adicional aumenta 15% do valor base
+    if quartos > 1:
+        acrescimo = valor_base * 0.15 * (quartos - 1)
+    else:
+        acrescimo = 0
+
+    total = valor_base + acrescimo
+
+    return {
+        "Tipo": imovel["nome"],
+        "Quartos": quartos,
+        "Valor Base": valor_base,
+        "Valor Final": total
+    }
+
+
+def main():
+    cabecalho()
+    menu()
+
+    try:
+        tipo = int(input("Digite o número correspondente ao tipo de imóvel: "))
+        quartos = int(input("Digite a quantidade de quartos: "))
+
+        resultado = gerar_orcamento(tipo, quartos)
+
+        if resultado:
+            print("\n--- ORÇAMENTO GERADO ---")
+            print(f"Tipo de Imóvel : {resultado['Tipo']}")
+            print(f"Quantidade de Quartos : {resultado['Quartos']}")
+            print(f"Valor Base : R$ {resultado['Valor Base']:.2f}")
+            print(f"Valor Final do Aluguel : R$ {resultado['Valor Final']:.2f}")
+            print("----------------------------")
+            print("Orçamento gerado com sucesso pela Imobiliária R.M!\n")
+        else:
+            print("\n[ERRO] Tipo de imóvel inválido! Tente novamente.\n")
+
+    except ValueError:
+        print("\n[ERRO] Entrada inválida! Use apenas números.\n")
+
+
+# Execução do programa
+if __name__ == "__main__":
+    main()
+
+
+def gerar_orcamento():
+    print("=== SISTEMA DE ORÇAMENTO DE ALUGUEL - IMOBILIÁRIA R.M ===")
+    print("Tipos de imóvel disponíveis:")
+    print("1 - Apartamento")
+    print("2 - Casa")
+    print("3 - Estúdio")
+    print("----------------------------------------------------------")
+
+    # Entrada do tipo de imóvel
+    opcao = input("Digite o número correspondente ao tipo de imóvel: ")
+
+    # Inicialização das variáveis
+    tipo = ""
+    valor_base = 0
+    valor_adicional = 0
+    quartos = 1
+
+    # Identificação do tipo de imóvel e valores padrão
+    if opcao == "1":
+        tipo = "Apartamento"
+        valor_base = 700
+        valor_adicional = 200
+    elif opcao == "2":
+        tipo = "Casa"
+        valor_base = 900
+        valor_adicional = 250
+    elif opcao == "3":
+        tipo = "Estúdio"
+        valor_base = 1200
+    else:
+        print("Opção inválida! Tente novamente.")
+        return
+
+    # Pergunta número de quartos (exceto estúdio)
+    if tipo != "Estúdio":
+        quartos = int(input("Informe o número de quartos: "))
+        if quartos < 1:
+            quartos = 1  # Garante que não haja valor negativo ou zero
+
+    # Cálculo do valor total
+    if tipo == "Estúdio":
+        valor_total = valor_bases
+    else:
+        valor_total = valor_base + (quartos - 1) * valor_adicional
+
+    # Exibição do resultado final
+    print("\n--- ORÇAMENTO DE LOCAÇÃO ---")
+    print(f"Tipo de Imóvel: {tipo}")
+    print(f"Número de Quartos: {quartos}")
+    print(f"Valor Mensal: R$ {valor_total:.2f}")
+    print("-------------------------------")
+    print("Imobiliária R.M - Seu novo lar começa aqui!")
+
+# Execução do programa
+gerar_orcamento()
